@@ -1,8 +1,11 @@
+import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.dataformat.xml.XmlMapper;
 import domain.ConstituencyResult;
+import domain.ConstituencyResults;
 //https://github.com/FasterXML/jackson-dataformat-xml
 import java.io.*;
+import java.util.List;
 
 /**
  * Created by roberj78 on 20/09/2016.
@@ -15,7 +18,7 @@ public class Hello {
 
 
         //stream of raw bites
-        InputStream initialStream = new FileInputStream(new File("/Users/roberj78/dev/source/exercise1/src/main/resources/election-results/result001.xml"));
+        InputStream initialStream = new FileInputStream(new File("/Users/roberj78/dev/source/exercise1/src/main/resources/election-results/result071.xml"));
         //wrap around, decide on format
         InputStreamReader reader = new InputStreamReader(initialStream);
 
@@ -49,11 +52,11 @@ public class Hello {
         //make a new constituency result object...
         //its contents are filled by using the xmlMapper object's readValue method...
         //which takes in the parameters: the xml file contents (as a string) and the constitucency class.
-        ConstituencyResult myResult = xmlMapper.readValue(xmlFileAsStringBuilder.toString(), ConstituencyResult.class);
+        List<ConstituencyResult> myResults = xmlMapper.readValue(xmlFileAsStringBuilder.toString(), new TypeReference<List <ConstituencyResult>>(){});
 
         //the object 'my result' now has the values from the xml inside its properties
 
-        System.out.println(myResult.toString());
+        System.out.println(myResults.toString());
 
     }
 

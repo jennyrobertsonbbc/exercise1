@@ -12,6 +12,8 @@ import java.util.List;
 //@JacksonXmlRootElement
 public class ConstituencyResult {
 
+
+
     @JacksonXmlProperty(localName = "constituencyName")
     private String constituencyName;
     @JacksonXmlProperty(localName = "consituencyId")//spelt wrong in xml :(
@@ -26,7 +28,7 @@ public class ConstituencyResult {
         return "ConstituencyResult{" +
                 "constituencyName='" + constituencyName + '\'' +
                 ", constituencyId=" + constituencyId +
-                ", seqNum=" + seqNo +
+                ", seqNo=" + seqNo +
                 ", results=" + results +
                 '}';
     }
