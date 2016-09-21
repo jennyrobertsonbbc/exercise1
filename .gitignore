@@ -4,7 +4,7 @@
 .classpath
 .idea/
 .metadata
-.DS_Store
+
 
 */.settings
 */.classpath
@@ -20,6 +20,7 @@ target
 *.swp
 *.pyc
 
+*.DS_Store
 *.class
 
 tmp
