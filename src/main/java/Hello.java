@@ -2,7 +2,6 @@ import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.dataformat.xml.XmlMapper;
 import domain.ConstituencyResult;
-import domain.ConstituencyResults;
 //https://github.com/FasterXML/jackson-dataformat-xml
 import java.io.*;
 import java.util.List;
@@ -14,9 +13,6 @@ public class Hello {
     public static void main(String[] args)
     throws IOException
     {
-        System.out.println("hello jenny");
-
-
         //stream of raw bites
         InputStream initialStream = new FileInputStream(new File("/Users/roberj78/dev/source/exercise1/src/main/resources/election-results/result071.xml"));
         //wrap around, decide on format
