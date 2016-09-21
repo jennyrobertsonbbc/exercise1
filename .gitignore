@@ -1,0 +1,31 @@
+# /
+.settings
+.project
+.classpath
+.idea/
+.metadata
+.DS_Store
+
+*/.settings
+*/.classpath
+*/.project
+*/.idea/
+target
+*/target
+
+*.iml
+*.iws
+*.ipr
+*~
+*.swp
+*.pyc
+
+*.class
+
+tmp
+
+# Package Files #
+*.jar
+*.war
+*.ear
+
