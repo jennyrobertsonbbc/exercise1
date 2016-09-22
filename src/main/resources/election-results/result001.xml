@@ -1,4 +1,4 @@
-
+<constituencyResults>
     <constituencyResult seqNo="1">
         <consituencyId>2</consituencyId>
         <constituencyName>Aberconwy</constituencyName>
@@ -40,3 +40,4 @@
             </result>
         </results>
     </constituencyResult>
+</constituencyResults>
