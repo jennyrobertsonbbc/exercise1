@@ -14,35 +14,23 @@ public class Hello {
 
     public static void main(String[] args) throws IOException {
 
-        List<ConstituencyResult> listOfConstituencyResults = new ArrayList<ConstituencyResult>();
-        //List<String> myList = new ArrayList<String>();
-
         //create an instance of this class
         Hello obj = new Hello();
 
-        //for every file in the election results directory
+        //Create a list in which to store the list of constituency results
+        List<ConstituencyResult> listOfConstituencyResults = new ArrayList<ConstituencyResult>();
+
+        //For every file in the election results directory
         for (File file : obj.getFilesInDirectory("election-results/").listFiles()) {
-            //turn it into a pojo and print out
-            //System.out.println(obj.returnXmlFileAsPojo(file));
-
+            //turn it into a pojo and add it to the list
             listOfConstituencyResults.add(obj.returnXmlFileAsPojo(file).get(0));
-            //myList.add("hello");
-
-
-
         }
 
+        //print the list of results out
         System.out.println(listOfConstituencyResults.toString());
 
 
     }
-
-//    public List<ConstituencyResult> putResultsInList(){
-//
-//
-//
-//        return
-//    }
 
     public File getFilesInDirectory(String directory) {
         //Get file from resources folder
