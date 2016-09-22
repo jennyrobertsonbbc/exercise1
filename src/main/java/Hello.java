@@ -82,6 +82,10 @@ public class Hello {
 
             //the object 'my result' now has the values from the xml inside its properties
 
+            //TEST
+
+
+
         } catch (IOException e) {
             //return empty list
             return new ArrayList<ConstituencyResult>();
