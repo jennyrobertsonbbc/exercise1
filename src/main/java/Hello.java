@@ -81,8 +81,7 @@ public class Hello {
             return myResults;
 
             //the object 'my result' now has the values from the xml inside its properties
-
-            //TEST
+            
 
 
 
