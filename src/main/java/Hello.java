@@ -5,7 +5,6 @@ import domain.ConstituencyResult;
 //https://github.com/FasterXML/jackson-dataformat-xml
 import java.io.*;
 import java.util.ArrayList;
-import java.util.LinkedList;
 import java.util.List;
 
 public class Hello {
@@ -27,7 +26,12 @@ public class Hello {
         }
 
         //print the list of results out
-        System.out.println(listOfConstituencyResults.toString());
+        //System.out.println(listOfConstituencyResults.toString());
+
+        //print each object as a table
+        for (ConstituencyResult result : listOfConstituencyResults){
+            result.printAsTable();
+        }
 
 
     }

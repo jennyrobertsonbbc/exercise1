@@ -23,6 +23,16 @@ public class ConstituencyResult {
 
     private List<Result> results;
 
+    public void printAsTable(){
+        System.out.println(constituencyName + "\n| Party | Votes | Share |\n|"
+                + results.get(1).getPartyCode() + "|"
+                + results.get(1).getVotes() + "|"
+                + results.get(1).getShare() + "|"
+                //needs to be put in a loop to go through all the results
+
+        );
+    }
+
     @Override
     public String toString() {
         return "ConstituencyResult{" +
