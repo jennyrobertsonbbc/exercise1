@@ -5,20 +5,29 @@ import domain.ConstituencyResult;
 //https://github.com/FasterXML/jackson-dataformat-xml
 import java.io.*;
 import java.util.ArrayList;
+import java.util.LinkedList;
 import java.util.List;
-import java.util.Scanner;
 
 public class Hello {
+
+
+
     public static void main(String[] args) throws IOException {
 
         //create an instance of this class
         Hello obj = new Hello();
 
-        //for every file in the election results directory
+        //Create a list in which to store the list of constituency results
+        List<ConstituencyResult> listOfConstituencyResults = new ArrayList<ConstituencyResult>();
+
+        //For every file in the election results directory
         for (File file : obj.getFilesInDirectory("election-results/").listFiles()) {
-            //turn it into a pojo and print out
-            System.out.println(obj.returnXmlFileAsPojo(file));
+            //turn it into a pojo and add it to the list
+            listOfConstituencyResults.add(obj.returnXmlFileAsPojo(file).get(0));
         }
+
+        //print the list of results out
+        System.out.println(listOfConstituencyResults.toString());
 
 
     }
@@ -72,8 +81,7 @@ public class Hello {
 
 
             //make a list to hold constituencyResult
-            //its contents are filled by using the xmlMapper object's readValue method...
-            //which takes in the parameters: the xml file contents (as a string) and the constituency list?.
+           //which takes in the parameters: the xml file contents (as a string) and the constituency list?.
 
             List<ConstituencyResult> myResults = xmlMapper.readValue(xmlFileAsStringBuilder.toString(), new TypeReference<List<ConstituencyResult>>() {
             });
@@ -81,7 +89,7 @@ public class Hello {
             return myResults;
 
             //the object 'my result' now has the values from the xml inside its properties
-            
+
 
 
 
