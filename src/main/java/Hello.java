@@ -6,10 +6,14 @@ import domain.ConstituencyResult;
 import java.io.*;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Scanner;
 
 public class Hello {
+
+    public List<ConstituencyResult> constituencyResultsInList;
+
     public static void main(String[] args) throws IOException {
+
+
 
         //create an instance of this class
         Hello obj = new Hello();
@@ -18,6 +22,9 @@ public class Hello {
         for (File file : obj.getFilesInDirectory("election-results/").listFiles()) {
             //turn it into a pojo and print out
             System.out.println(obj.returnXmlFileAsPojo(file));
+
+
+            
         }
 
 
@@ -72,8 +79,7 @@ public class Hello {
 
 
             //make a list to hold constituencyResult
-            //its contents are filled by using the xmlMapper object's readValue method...
-            //which takes in the parameters: the xml file contents (as a string) and the constituency list?.
+           //which takes in the parameters: the xml file contents (as a string) and the constituency list?.
 
             List<ConstituencyResult> myResults = xmlMapper.readValue(xmlFileAsStringBuilder.toString(), new TypeReference<List<ConstituencyResult>>() {
             });
@@ -81,7 +87,7 @@ public class Hello {
             return myResults;
 
             //the object 'my result' now has the values from the xml inside its properties
-            
+
 
 
 
