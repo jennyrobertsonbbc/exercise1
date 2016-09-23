@@ -5,15 +5,14 @@ import domain.ConstituencyResult;
 //https://github.com/FasterXML/jackson-dataformat-xml
 import java.io.*;
 import java.util.*;
-import java.util.concurrent.TimeUnit;
 
-public class Hello {
+public class ElectionResultsApp {
 
 
     public static void main(String[] args) throws IOException {
 
         //Create an instance of this class
-        Hello obj = new Hello();
+        ElectionResultsApp obj = new ElectionResultsApp();
 
         //Create a list in which to store the list of constituency results
         List<ConstituencyResult> listOfConstituencyResults = new ArrayList<ConstituencyResult>();
@@ -29,7 +28,7 @@ public class Hello {
 
             //wait 1 second
             try {
-                Thread.sleep(1000);
+                Thread.sleep(1);
             } catch (InterruptedException e) {
             }
 
