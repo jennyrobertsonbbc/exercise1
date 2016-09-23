@@ -24,13 +24,17 @@ public class ConstituencyResult {
     private List<Result> results;
 
     public void printAsTable(){
-        System.out.println(constituencyName + "\n| Party | Votes | Share |\n|"
-                + results.get(1).getPartyCode() + "|"
-                + results.get(1).getVotes() + "|"
-                + results.get(1).getShare() + "|"
-                //needs to be put in a loop to go through all the results
+        System.out.println("\n" + constituencyName + "\n\n|Party|Votes|Share|");
+
+        //loop through each result object
+        for (Result result : results)
+        System.out.println(
+                "|" + result.getPartyCode() + "|"
+                + result.getVotes() + "|"
+                + result.getShare() + "|"
 
         );
+        System.out.println("\n");
     }
 
     @Override
