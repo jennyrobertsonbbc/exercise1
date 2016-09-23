@@ -8,6 +8,7 @@ import java.util.*;
 
 public class ElectionResultsApp {
 
+    private final String directoryString = "election-results/";
 
     public static void main(String[] args) throws IOException {
 
@@ -18,27 +19,20 @@ public class ElectionResultsApp {
         List<ConstituencyResult> listOfConstituencyResults = new ArrayList<ConstituencyResult>();
 
         //loop through every file in the directory
-        for (int i = 0; i < obj.getNumberOfFilesInDirectory(obj.getDirectoryAsFile("election-results/")); i++) {
+        for (int i = 0; i < obj.getNumberOfFilesInDirectory(obj.directoryString); i++) {
 
             //turn file into POJO and add it to list
-            listOfConstituencyResults.add(obj.returnXmlFileAsPojo(obj.getSingleFileFromDirectory("election-results/", i)).get(0));
+            listOfConstituencyResults.add(obj.returnXmlFileAsPojo(obj.getSingleFileFromDirectory(obj.directoryString, i)).get(0));
 
             //print the file
             listOfConstituencyResults.get(i).printAsTable();
 
             //wait 1 second
             try {
-                Thread.sleep(1);
-            } catch (InterruptedException e) {
-            }
+                Thread.sleep(500);
+            } catch (InterruptedException e) {}
 
         }
-
-        //print each object in the list as a table
-        for (ConstituencyResult result : listOfConstituencyResults) {
-            result.printAsTable();
-        }
-
 
     }
 
@@ -62,8 +56,8 @@ public class ElectionResultsApp {
         return directoryFile;
     }
 
-    public long getNumberOfFilesInDirectory(File directory) {
-        return directory.listFiles().length;
+    public long getNumberOfFilesInDirectory(String directory) {
+        return getDirectoryAsFile(directory).listFiles().length;
     }
 
     public List<ConstituencyResult> returnXmlFileAsPojo(File file) {
