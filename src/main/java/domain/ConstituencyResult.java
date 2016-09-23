@@ -1,17 +1,12 @@
 package domain;
 
 import com.fasterxml.jackson.dataformat.xml.annotation.JacksonXmlProperty;
-import com.fasterxml.jackson.dataformat.xml.annotation.JacksonXmlRootElement;
 
 import java.util.List;
 
-/**
- * Created by roberj78 on 20/09/2016.
- */
 
 //@JacksonXmlRootElement
 public class ConstituencyResult {
-
 
 
     @JacksonXmlProperty(localName = "constituencyName")
@@ -22,6 +17,21 @@ public class ConstituencyResult {
     private int seqNo;
 
     private List<Result> results;
+
+    public void printAsTable() {
+        //print out the heading
+        System.out.println("\n" + constituencyName + "\n\n|Party|Votes|Share|");
+
+        //loop through each result object and print it
+        for (Result result : results)
+            System.out.println(
+                    "|" + result.getPartyCode() + "|"
+                            + result.getVotes() + "|"
+                            + result.getShare() + "|"
+
+            );
+        System.out.println("\n");
+    }
 
     @Override
     public String toString() {
