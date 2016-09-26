@@ -40,4 +40,15 @@ public class Result {
     public void setShare(float share) {
         this.share = share;
     }
+
+    public Result(String partyCode, int votes, float share) {
+        this.partyCode = partyCode;
+        this.votes = votes;
+        this.share = share;
+    }
+
+    //no arg constuctor for jackson to use
+    public Result(){
+
+    }
 }

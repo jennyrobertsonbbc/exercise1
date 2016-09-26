@@ -21,8 +21,16 @@ public class ElectionResultsApp {
         //loop through every file in the directory
         for (int i = 0; i < obj.getNumberOfFilesInDirectory(obj.directoryString); i++) {
 
+            File filename = obj.getSingleFileFromDirectory(obj.directoryString, i);
+
+            List<ConstituencyResult> XmlFileList = obj.returnXmlFileAsPojo(filename);
+
+            ConstituencyResult currentXmlFile = XmlFileList.get(0);
+
+
+
             //turn file into POJO and add it to list
-            listOfConstituencyResults.add(obj.returnXmlFileAsPojo(obj.getSingleFileFromDirectory(obj.directoryString, i)).get(0));
+            listOfConstituencyResults.add(currentXmlFile);
 
             //print the file
             listOfConstituencyResults.get(i).printAsTable();

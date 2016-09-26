@@ -18,19 +18,25 @@ public class ConstituencyResult {
 
     private List<Result> results;
 
-    public void printAsTable() {
-        //print out the headinggi
-        System.out.println("\n" + constituencyName + seqNo + "\n\n|Party|Votes|Share|");
+    public String printAsTable() {
+        //print out the heading
+
+        StringBuilder printedTable = new StringBuilder();
+
+        printedTable.append("\n" + constituencyName + seqNo + "\n\n|Party|Votes|Share|");
 
         //loop through each result object and print it
         for (Result result : results)
-            System.out.println(
-                    "|" + result.getPartyCode() + "|"
+            printedTable.append(
+                    "\n|" + result.getPartyCode() + "|"
                             + result.getVotes() + "|"
                             + result.getShare() + "|"
 
             );
-        System.out.println("\n");
+
+        printedTable.append("\n");
+        System.out.println(printedTable.toString());
+        return printedTable.toString();
     }
 
     @Override
