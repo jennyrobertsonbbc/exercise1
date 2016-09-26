@@ -42,10 +42,9 @@ public class Directory {
         return directoryFile.listFiles().length;
     }
 
-    public List<ConstituencyResult> returnXmlFileAsPojo(File file) {
+    public String readFileInAsString(File file) {
 
         try {
-
 
             //stream of raw bites
             InputStream initialStream = new FileInputStream(file);
@@ -70,28 +69,32 @@ public class Directory {
             }
             while (lineOfFile != null);
 
-
-            //stop reading the file
-            bufferedReader.close();
-
-            //make a new xmlMapper object called xmlMapper
-            ObjectMapper xmlMapper = new XmlMapper();
-
-
-            //make a list to hold constituencyResult
-            //which takes in the parameters: the xml file contents (as a string) and the constituency list?.
-
-            List<ConstituencyResult> myResults = xmlMapper.readValue(xmlFileAsStringBuilder.toString(), new TypeReference<List<ConstituencyResult>>() {
-            });
-
-            return myResults;
-
-            //the object 'my result' now has the values from the xml inside its properties
+            return xmlFileAsStringBuilder.toString();
 
 
         } catch (IOException e) {
-            //return empty list
-            return new ArrayList<ConstituencyResult>();
+            return "";
+        }
+
+
+    }
+
+    public ConstituencyResult returnXmlFileAsPojo(String xmlAsString) {
+
+        //make a new xmlMapper object called xmlMapper
+        ObjectMapper xmlMapper = new XmlMapper();
+
+        try {
+            //feed the xml file as a string and the constituency result object we want in.
+            List<ConstituencyResult> constituencyResult = xmlMapper.readValue(xmlAsString, new TypeReference<List<ConstituencyResult>>() {
+            });
+
+            //return the object
+            return constituencyResult.get(0);
+
+        } catch (IOException e) {
+            //return empty
+            return new ConstituencyResult();
         }
 
 

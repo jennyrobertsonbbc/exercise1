@@ -18,10 +18,10 @@ public class ElectionResultsApp {
 
             File xmlFile = directory.getSingleFileFromDirectory(i);
 
-            //It has to be in a list because of how the xml is laid it thinks there could be many constituency results
-            List<ConstituencyResult> currentConstituencyResultAsList = directory.returnXmlFileAsPojo(xmlFile);
-            //just get the first one in the list
-            ConstituencyResult currentConstituencyResult = currentConstituencyResultAsList.get(0);
+            String fileAsString = directory.readFileInAsString(xmlFile);
+
+            ConstituencyResult currentConstituencyResult = directory.returnXmlFileAsPojo(fileAsString);
+
 
             //add to the list
             listOfConstituencyResults.add(currentConstituencyResult);

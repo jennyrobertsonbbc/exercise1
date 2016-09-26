@@ -9,6 +9,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import static junit.framework.TestCase.assertEquals;
+import static org.junit.Assert.assertSame;
 
 
 /**
@@ -19,6 +20,8 @@ public class DirectoryTest {
     @Test
     public void returnXmlFileAsPojo(){
 
+        String xmlFile = "<constituencyResults> <constituencyResult seqNo=\"1\"> <consituencyId>2</consituencyId> <constituencyName>Aberconwy</constituencyName> <results> <result> <partyCode>LAB</partyCode> <votes>8994</votes> <share>33.00</share> </result> <result> <partyCode>CON</partyCode> <votes>7924</votes> <share>29.10</share> </result> <result> <partyCode>LD</partyCode> <votes>5197</votes> <share>19.10</share> </result> <result> <partyCode>PC</partyCode> <votes>3818</votes> <share>14.00</share> </result> <result> <partyCode>OTH</partyCode> <votes>517</votes> <share>1.90</share> </result> <result> <partyCode>GRN</partyCode> <votes>512</votes> <share>1.90</share> </result> <result> <partyCode>UKIP</partyCode> <votes>296</votes> <share>1.10</share> </result> </results> </constituencyResult> </constituencyResults> ";
+
 
 
         Directory directory = new Directory("election-results/result001.xml");
@@ -26,6 +29,7 @@ public class DirectoryTest {
         //add the values to the test object
         ConstituencyResult expectedPojo = new ConstituencyResult();
         expectedPojo.setConstituencyName("Aberconwy");
+        expectedPojo.setConstituencyId(2);
         expectedPojo.setSeqNum(1);
 
         //create a list of results to add to the test object
@@ -42,10 +46,14 @@ public class DirectoryTest {
         //add the results to the object
         expectedPojo.setResults(results);
 
-        File xmlFile = directory.getSingleFileFromDirectory(0);
+        ConstituencyResult theResult = directory.returnXmlFileAsPojo(xmlFile);
+
 
         //test if the same
-        assertEquals(directory.returnXmlFileAsPojo(xmlFile).get(0),expectedPojo);
+        assertEquals(theResult,expectedPojo);
+
+
+
 
 
 
