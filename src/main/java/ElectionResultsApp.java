@@ -16,10 +16,10 @@ public class ElectionResultsApp {
         //loop through every file in the directory
         for (int i = 0; i < directory.getNumberOfFilesInDirectory(); i++) {
 
-            File XmlFile = directory.getSingleFileFromDirectory(i);
+            File xmlFile = directory.getSingleFileFromDirectory(i);
 
             //It has to be in a list because of how the xml is laid it thinks there could be many constituency results
-            List<ConstituencyResult> currentConstituencyResultAsList = directory.returnXmlFileAsPojo(XmlFile);
+            List<ConstituencyResult> currentConstituencyResultAsList = directory.returnXmlFileAsPojo(xmlFile);
             //just get the first one in the list
             ConstituencyResult currentConstituencyResult = currentConstituencyResultAsList.get(0);
 

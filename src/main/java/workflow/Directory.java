@@ -20,6 +20,7 @@ public class Directory {
         this.directoryString = directory;
     }
 
+
     public File getSingleFileFromDirectory(int index) {
         //Get file from resources folder
         ClassLoader classLoader = getClass().getClassLoader();
@@ -32,16 +33,13 @@ public class Directory {
     }
 
 
-    public File getDirectoryAsFile() {
+    public long getNumberOfFilesInDirectory() {
+
         //Get file from resources folder
         ClassLoader classLoader = getClass().getClassLoader();
         File directoryFile = new File(classLoader.getResource(directoryString).getFile());
 
-        return directoryFile;
-    }
-
-    public long getNumberOfFilesInDirectory() {
-        return getDirectoryAsFile().listFiles().length;
+        return directoryFile.listFiles().length;
     }
 
     public List<ConstituencyResult> returnXmlFileAsPojo(File file) {
