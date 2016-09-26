@@ -4,40 +4,60 @@ import com.fasterxml.jackson.dataformat.xml.XmlMapper;
 import domain.ConstituencyResult;
 //https://github.com/FasterXML/jackson-dataformat-xml
 import java.io.*;
-import java.util.ArrayList;
-import java.util.List;
+import java.util.*;
 
-public class Hello {
-
+public class ElectionResultsApp {
+//41 has an error
+    private final String directoryString = "election-results/";
 
     public static void main(String[] args) throws IOException {
 
         //Create an instance of this class
-        Hello obj = new Hello();
+        ElectionResultsApp obj = new ElectionResultsApp();
 
         //Create a list in which to store the list of constituency results
         List<ConstituencyResult> listOfConstituencyResults = new ArrayList<ConstituencyResult>();
 
-        //For every file in the election results directory
-        for (File file : obj.getFilesFromDirectory("election-results/").listFiles()) {
-            //turn it into a pojo and add it to the list
-            listOfConstituencyResults.add(obj.returnXmlFileAsPojo(file).get(0));
-        }
+        //loop through every file in the directory
+        for (int i = 0; i < obj.getNumberOfFilesInDirectory(obj.directoryString); i++) {
 
-        //print each object as a table
-        for (ConstituencyResult result : listOfConstituencyResults) {
-            result.printAsTable();
-        }
+            //turn file into POJO and add it to list
+            listOfConstituencyResults.add(obj.returnXmlFileAsPojo(obj.getSingleFileFromDirectory(obj.directoryString, i)).get(0));
 
+            //print the file
+            listOfConstituencyResults.get(i).printAsTable();
+
+            //wait 1 second
+            try {
+                Thread.sleep(500);
+            } catch (InterruptedException e) {}
+
+        }
 
     }
 
-    public File getFilesFromDirectory(String directory) {
+
+    public File getSingleFileFromDirectory(String directory, int index) {
+        //Get file from resources folder
+        ClassLoader classLoader = getClass().getClassLoader();
+        File directoryFile = new File(classLoader.getResource(directory).getFile());
+
+
+        File[] files = directoryFile.listFiles();
+
+        return files[index];
+    }
+
+    public File getDirectoryAsFile(String directory) {
         //Get file from resources folder
         ClassLoader classLoader = getClass().getClassLoader();
         File directoryFile = new File(classLoader.getResource(directory).getFile());
 
         return directoryFile;
+    }
+
+    public long getNumberOfFilesInDirectory(String directory) {
+        return getDirectoryAsFile(directory).listFiles().length;
     }
 
     public List<ConstituencyResult> returnXmlFileAsPojo(File file) {
@@ -63,10 +83,6 @@ public class Hello {
             do {
                 //save the line of the file as 'LineOfFile'
                 lineOfFile = bufferedReader.readLine();
-                //Print it out
-//                if(lineOfFile != null) {
-//                    System.out.println(lineOfFile);
-//                }
                 //append the line to the string builder string
                 xmlFileAsStringBuilder.append(lineOfFile);
             }

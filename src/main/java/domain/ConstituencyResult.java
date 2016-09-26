@@ -20,7 +20,7 @@ public class ConstituencyResult {
 
     public void printAsTable() {
         //print out the heading
-        System.out.println("\n" + constituencyName + "\n\n|Party|Votes|Share|");
+        System.out.println("\n" + constituencyName + seqNo + "\n\n|Party|Votes|Share|");
 
         //loop through each result object and print it
         for (Result result : results)
