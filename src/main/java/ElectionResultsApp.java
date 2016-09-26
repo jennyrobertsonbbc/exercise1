@@ -1,36 +1,30 @@
-import com.fasterxml.jackson.core.type.TypeReference;
-import com.fasterxml.jackson.databind.ObjectMapper;
-import com.fasterxml.jackson.dataformat.xml.XmlMapper;
 import domain.ConstituencyResult;
+import workflow.Directory;
 //https://github.com/FasterXML/jackson-dataformat-xml
 import java.io.*;
 import java.util.*;
 
 public class ElectionResultsApp {
-//41 has an error
-    private final String directoryString = "election-results/";
-
+    //41 has an error
     public static void main(String[] args) throws IOException {
 
-        //Create an instance of this class
-        ElectionResultsApp obj = new ElectionResultsApp();
+        Directory directory = new Directory("election-results/");
 
         //Create a list in which to store the list of constituency results
         List<ConstituencyResult> listOfConstituencyResults = new ArrayList<ConstituencyResult>();
 
         //loop through every file in the directory
-        for (int i = 0; i < obj.getNumberOfFilesInDirectory(obj.directoryString); i++) {
+        for (int i = 0; i < directory.getNumberOfFilesInDirectory(); i++) {
 
-            File filename = obj.getSingleFileFromDirectory(obj.directoryString, i);
+            File XmlFile = directory.getSingleFileFromDirectory(i);
 
-            List<ConstituencyResult> XmlFileList = obj.returnXmlFileAsPojo(filename);
+            //It has to be in a list because of how the xml is laid it thinks there could be many constituency results
+            List<ConstituencyResult> currentConstituencyResultAsList = directory.returnXmlFileAsPojo(XmlFile);
+            //just get the first one in the list
+            ConstituencyResult currentConstituencyResult = currentConstituencyResultAsList.get(0);
 
-            ConstituencyResult currentXmlFile = XmlFileList.get(0);
-
-
-
-            //turn file into POJO and add it to list
-            listOfConstituencyResults.add(currentXmlFile);
+            //add to the list
+            listOfConstituencyResults.add(currentConstituencyResult);
 
             //print the file
             listOfConstituencyResults.get(i).printAsTable();
@@ -38,91 +32,11 @@ public class ElectionResultsApp {
             //wait 1 second
             try {
                 Thread.sleep(500);
-            } catch (InterruptedException e) {}
-
-        }
-
-    }
-
-
-    public File getSingleFileFromDirectory(String directory, int index) {
-        //Get file from resources folder
-        ClassLoader classLoader = getClass().getClassLoader();
-        File directoryFile = new File(classLoader.getResource(directory).getFile());
-
-
-        File[] files = directoryFile.listFiles();
-
-        return files[index];
-    }
-
-
-    public File getDirectoryAsFile(String directory) {
-        //Get file from resources folder
-        ClassLoader classLoader = getClass().getClassLoader();
-        File directoryFile = new File(classLoader.getResource(directory).getFile());
-
-        return directoryFile;
-    }
-
-    public long getNumberOfFilesInDirectory(String directory) {
-        return getDirectoryAsFile(directory).listFiles().length;
-    }
-
-    public List<ConstituencyResult> returnXmlFileAsPojo(File file) {
-
-        try {
-
-
-            //stream of raw bites
-            InputStream initialStream = new FileInputStream(file);
-            //wrap around, decide on format
-            InputStreamReader reader = new InputStreamReader(initialStream);
-
-            //make a buffer object for use later. A buffered reader reads it in bit by bit using a buffer instead of all at once.
-            BufferedReader bufferedReader = new BufferedReader(reader);
-
-            //String to hold each line.
-            String lineOfFile = null;
-
-            //Create string builder object to make the string
-            StringBuilder xmlFileAsStringBuilder = new StringBuilder();
-
-
-            do {
-                //save the line of the file as 'LineOfFile'
-                lineOfFile = bufferedReader.readLine();
-                //append the line to the string builder string
-                xmlFileAsStringBuilder.append(lineOfFile);
+            } catch (InterruptedException e) {
             }
-            while (lineOfFile != null);
 
-
-            //stop reading the file
-            bufferedReader.close();
-
-            //make a new xmlMapper object called xmlMapper
-            ObjectMapper xmlMapper = new XmlMapper();
-
-
-            //make a list to hold constituencyResult
-            //which takes in the parameters: the xml file contents (as a string) and the constituency list?.
-
-            List<ConstituencyResult> myResults = xmlMapper.readValue(xmlFileAsStringBuilder.toString(), new TypeReference<List<ConstituencyResult>>() {
-            });
-
-            return myResults;
-
-            //the object 'my result' now has the values from the xml inside its properties
-
-
-        } catch (IOException e) {
-            //return empty list
-            return new ArrayList<ConstituencyResult>();
         }
 
-
     }
-
 
 }
