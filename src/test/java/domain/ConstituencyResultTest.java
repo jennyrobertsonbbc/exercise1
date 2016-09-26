@@ -44,10 +44,10 @@ public class ConstituencyResultTest {
         results.add(new Result("UKIP",296,(float)1.1));
 
 
-
+        //add the results to the object
         constituencyResult.setResults(results);
 
-
+        //test if the same
         assertEquals(expectedPrintAsTable,constituencyResult.printAsTable());
 
     }
