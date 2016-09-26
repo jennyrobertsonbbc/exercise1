@@ -19,7 +19,7 @@ public class ConstituencyResult {
     private List<Result> results;
 
     public void printAsTable() {
-        //print out the heading
+        //print out the headinggi
         System.out.println("\n" + constituencyName + seqNo + "\n\n|Party|Votes|Share|");
 
         //loop through each result object and print it

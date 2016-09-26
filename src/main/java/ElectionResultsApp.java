@@ -48,6 +48,7 @@ public class ElectionResultsApp {
         return files[index];
     }
 
+
     public File getDirectoryAsFile(String directory) {
         //Get file from resources folder
         ClassLoader classLoader = getClass().getClassLoader();
