@@ -14,26 +14,29 @@ import java.net.URL;
 import java.util.Objects;
 
 public class XMLValidator {
-    public static final String XML_FILE = "election-results/result002.xml";
-    public static final String SCHEMA_FILE = "XSD/constituencyResultXSD.xsd";
+//    public static final String XML_FILE = "election-results/result002.xml";
+//    public static final String SCHEMA_FILE = "XSD/constituencyResultXSD.xsd";
 
-    public static void main(String[] args) {
-        XMLValidator XMLValidator = new XMLValidator();
-        boolean valid = XMLValidator.validate(XML_FILE, SCHEMA_FILE);
+//    public static void main(String[] args) {
+//        XMLValidator XMLValidator = new XMLValidator();
+//        boolean valid = XMLValidator.validate(XML_FILE, SCHEMA_FILE);
+//
+//        System.out.printf("%s validation = %b.", XML_FILE, valid);
+//    }
 
-        System.out.printf("%s validation = %b.", XML_FILE, valid);
-    }
-
-    private boolean validate(String xmlFile, String schemaFile) {
+    public boolean validate(String xmlFile, String schemaFile) {
         SchemaFactory schemaFactory = SchemaFactory.newInstance(XMLConstants.W3C_XML_SCHEMA_NS_URI);
         try {
+            //See if it validates
             Schema schema = schemaFactory.newSchema(new File(getResource(schemaFile)));
 
             Validator validator = schema.newValidator();
             validator.validate(new StreamSource(new File(getResource(xmlFile))));
+
             return true;
+            //if not catch the error
         } catch (SAXException | IOException e) {
-            e.printStackTrace();
+            //e.printStackTrace();
             //System.out.println("Failed!");
             return false;
         }
