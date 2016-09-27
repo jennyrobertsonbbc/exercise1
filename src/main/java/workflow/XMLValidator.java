@@ -24,14 +24,14 @@ public class XMLValidator {
 //        System.out.printf("%s validation = %b.", XML_FILE, valid);
 //    }
 
-    public boolean validate(String xmlFile, String schemaFile) {
+    public boolean validate(File xmlFile, File schemaFile) {
         SchemaFactory schemaFactory = SchemaFactory.newInstance(XMLConstants.W3C_XML_SCHEMA_NS_URI);
         try {
             //See if it validates
-            Schema schema = schemaFactory.newSchema(new File(getResource(schemaFile)));
+            Schema schema = schemaFactory.newSchema(schemaFile);
 
             Validator validator = schema.newValidator();
-            validator.validate(new StreamSource(new File(getResource(xmlFile))));
+            validator.validate(new StreamSource(xmlFile));
 
             return true;
             //if not catch the error

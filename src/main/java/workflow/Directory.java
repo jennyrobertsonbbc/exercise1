@@ -6,8 +6,10 @@ import com.fasterxml.jackson.dataformat.xml.XmlMapper;
 import domain.ConstituencyResult;
 
 import java.io.*;
+import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 /**
  * Created by roberj78 on 26/09/2016.
@@ -40,6 +42,14 @@ public class Directory {
         File directoryFile = new File(classLoader.getResource(directoryString).getFile());
 
         return directoryFile.listFiles().length;
+    }
+
+    public String getResource(String filename) throws FileNotFoundException {
+
+        URL resource = getClass().getClassLoader().getResource(filename);
+        Objects.requireNonNull(resource);
+
+        return resource.getFile();
     }
 
     public String readFileInAsString(File file) {

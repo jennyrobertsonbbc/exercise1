@@ -5,7 +5,7 @@
         <xs:element name="constituencyResult">
           <xs:complexType>
             <xs:sequence>
-              <xs:element type="xs:byte" name="consituencyId"/>
+              <xs:element type="xs:integer" name="consituencyId"/>
               <xs:element type="xs:string" name="constituencyName"/>
               <xs:element name="results">
                 <xs:complexType>
@@ -23,7 +23,7 @@
                 </xs:complexType>
               </xs:element>
             </xs:sequence>
-            <xs:attribute type="xs:byte" name="seqNo"/>
+            <xs:attribute type="xs:int" name="seqNo"/>
           </xs:complexType>
         </xs:element>
       </xs:sequence>
