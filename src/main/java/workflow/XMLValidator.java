@@ -14,15 +14,7 @@ import java.net.URL;
 import java.util.Objects;
 
 public class XMLValidator {
-//    public static final String XML_FILE = "election-results/result002.xml";
-//    public static final String SCHEMA_FILE = "XSD/constituencyResultXSD.xsd";
 
-//    public static void main(String[] args) {
-//        XMLValidator XMLValidator = new XMLValidator();
-//        boolean valid = XMLValidator.validate(XML_FILE, SCHEMA_FILE);
-//
-//        System.out.printf("%s validation = %b.", XML_FILE, valid);
-//    }
 
     public boolean validate(File xmlFile, File schemaFile) {
         SchemaFactory schemaFactory = SchemaFactory.newInstance(XMLConstants.W3C_XML_SCHEMA_NS_URI);
