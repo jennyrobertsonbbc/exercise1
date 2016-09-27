@@ -51,4 +51,25 @@ public class Result {
     public Result(){
 
     }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+
+        Result result = (Result) o;
+
+        if (votes != result.votes) return false;
+        if (Float.compare(result.share, share) != 0) return false;
+        return partyCode != null ? partyCode.equals(result.partyCode) : result.partyCode == null;
+
+    }
+
+    @Override
+    public int hashCode() {
+        int result = partyCode != null ? partyCode.hashCode() : 0;
+        result = 31 * result + votes;
+        result = 31 * result + (share != +0.0f ? Float.floatToIntBits(share) : 0);
+        return result;
+    }
 }

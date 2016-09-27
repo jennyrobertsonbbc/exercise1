@@ -80,4 +80,28 @@ public class ConstituencyResult {
     public void setResults(List<Result> results) {
         this.results = results;
     }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+
+        ConstituencyResult that = (ConstituencyResult) o;
+
+        if (constituencyId != that.constituencyId) return false;
+        if (seqNo != that.seqNo) return false;
+        if (constituencyName != null ? !constituencyName.equals(that.constituencyName) : that.constituencyName != null)
+            return false;
+        return results != null ? results.equals(that.results) : that.results == null;
+
+    }
+
+    @Override
+    public int hashCode() {
+        int result = constituencyName != null ? constituencyName.hashCode() : 0;
+        result = 31 * result + constituencyId;
+        result = 31 * result + seqNo;
+        result = 31 * result + (results != null ? results.hashCode() : 0);
+        return result;
+    }
 }
