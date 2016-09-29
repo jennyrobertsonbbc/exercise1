@@ -1,4 +1,7 @@
 import domain.ConstituencyResult;
+import domain.Result;
+import persistance.MapRepository;
+import persistance.ResultRepository;
 import workflow.Directory;
 import workflow.XMLValidator;
 //https://github.com/FasterXML/jackson-dataformat-xml
@@ -16,7 +19,8 @@ public class ElectionResultsApp {
         final String SCHEMA_FILE_STRING = "XSD/constituencyResultXSD.xsd";
 
         //Create a list in which to store the list of constituency results
-        List<ConstituencyResult> listOfConstituencyResults = new ArrayList<ConstituencyResult>();
+        //List<ConstituencyResult> listOfConstituencyResults = new ArrayList<ConstituencyResult>();
+        ResultRepository resultRepositary = new MapRepository();
 
         //loop through every file in the directory
         for (int i = 0; i < directory.getNumberOfFilesInDirectory(); i++) {
@@ -49,11 +53,11 @@ public class ElectionResultsApp {
 
 
             //add to the list
-            listOfConstituencyResults.add(currentConstituencyResult);
+            resultRepositary.saveResult(currentConstituencyResult);
 
 
             //print the file
-          currentConstituencyResult.printAsTable();
+          resultRepositary.getResult(currentConstituencyResult.getConstituencyId()).printAsTable();
 
             //wait 1 second
             try {
